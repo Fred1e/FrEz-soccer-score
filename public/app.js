@@ -3,63 +3,55 @@ document.getElementById('uploadForm').addEventListener('submit', function(event)
 
     const fileInput = document.getElementById('fileInput');
     const formData = new FormData();
-
-    // Append all selected files to the formData
     for (let i = 0; i < fileInput.files.length; i++) {
-        formData.append('file[]', fileInput.files[i]);
+        formData.append('file', fileInput.files[i]);
     }
 
-    // Send the files to the server
-    fetch('/upload', {
+    // Sending the file to Catbox API
+    fetch('https://catbox.moe/user/api.php', {
         method: 'POST',
         body: formData
     })
-    .then(response => response.json())
+    .then(response => response.text())  // Catbox returns a URL as plain text
     .then(data => {
-        if (data.success) {
-            data.urls.forEach(url => displayMedia(url));
+        if (data.startsWith('https://')) {
+            displayMedia(data);  // If the response starts with a URL, display the media
         } else {
-            alert('Upload failed!');
+            alert('Upload failed! Response: ' + data);
         }
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Upload failed!');
+    });
 });
 
-// Function to display media based on file type
 function displayMedia(url) {
     const mediaList = document.getElementById('mediaList');
-    const mediaElement = document.createElement('div');
-
+    const mediaElement = document.createElement('a');
+    
+    // Check file extension to determine whether it's an image, audio, video, etc.
     const fileExtension = url.split('.').pop().toLowerCase();
-
-    if (['jpg', 'jpeg', 'png', 'gif', 'bmp', 'svg'].includes(fileExtension)) {
+    if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension)) {
         const imgElement = document.createElement('img');
         imgElement.src = url;
         imgElement.alt = 'Uploaded Image';
-        imgElement.style.maxWidth = '200px';
+        imgElement.style.maxWidth = '300px';
+        imgElement.style.maxHeight = '300px';
         mediaElement.appendChild(imgElement);
-    } else if (['mp3', 'wav', 'ogg'].includes(fileExtension)) {
+    } else if (['mp3', 'wav'].includes(fileExtension)) {
         const audioElement = document.createElement('audio');
         audioElement.controls = true;
         audioElement.src = url;
         mediaElement.appendChild(audioElement);
-    } else if (['mp4', 'avi', 'mov', 'webm'].includes(fileExtension)) {
+    } else if (['mp4', 'webm', 'avi'].includes(fileExtension)) {
         const videoElement = document.createElement('video');
         videoElement.controls = true;
         videoElement.src = url;
         mediaElement.appendChild(videoElement);
-    } else if (['pdf', 'txt', 'doc', 'docx'].includes(fileExtension)) {
-        const docElement = document.createElement('a');
-        docElement.href = url;
-        docElement.textContent = 'Download Document';
-        docElement.target = '_blank';
-        mediaElement.appendChild(docElement);
-    } else if (['zip', 'rar'].includes(fileExtension)) {
-        const zipElement = document.createElement('a');
-        zipElement.href = url;
-        zipElement.textContent = 'Download Archive';
-        zipElement.target = '_blank';
-        mediaElement.appendChild(zipElement);
+    } else {
+        mediaElement.href = url;
+        mediaElement.textContent = 'Download file';
     }
 
     mediaList.appendChild(mediaElement);
