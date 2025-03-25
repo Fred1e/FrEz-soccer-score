@@ -1,38 +1,124 @@
+/* General body styling */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f1f1f1;
+    background: linear-gradient(45deg, #1a1a1a, #333);
+    color: #fff;
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
 }
 
+/* Center the content */
 .container {
-    width: 80%;
-    margin: auto;
-    padding-top: 20px;
     text-align: center;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 0 50px rgba(0, 255, 255, 0.6), 0 0 30px rgba(255, 0, 255, 0.6);
+    background-color: rgba(0, 0, 0, 0.7);
+    animation: pulse 3s infinite;
 }
 
+/* Neon text effect */
+.neon-text {
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 0 0 75px #ff00ff;
+    animation: neonAnimation 1.5s ease-in-out infinite alternate;
+}
+
+/* Button with neon effect */
+.neon-button {
+    background-color: transparent;
+    border: 2px solid #ff00ff;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: #ff00ff;
+    cursor: pointer;
+    border-radius: 5px;
+    outline: none;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.neon-button:hover {
+    background-color: #ff00ff;
+    color: #1a1a1a;
+    box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
+}
+
+/* Animation for the neon text */
+@keyframes neonAnimation {
+    0% {
+        text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff, 0 0 50px #ff00ff, 0 0 75px #ff00ff;
+    }
+    100% {
+        text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff, 0 0 50px #00ffff, 0 0 75px #00ffff, 0 0 100px #00ffff;
+    }
+}
+
+/* Pulse animation for the container */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 50px rgba(0, 255, 255, 0.6), 0 0 30px rgba(255, 0, 255, 0.6);
+    }
+    100% {
+        box-shadow: 0 0 100px rgba(0, 255, 255, 0.8), 0 0 60px rgba(255, 0, 255, 0.8);
+    }
+}
+
+/* Media list styles */
+#mediaList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#mediaList img, #mediaList video {
+    max-width: 300px;
+    max-height: 300px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+}
+
+/* Upload form styles */
 form {
     margin: 20px 0;
 }
 
 input[type="file"] {
     padding: 10px;
-    margin-right: 10px;
+    margin: 20px 0;
+    background-color: transparent;
+    border: 2px solid #ff00ff;
+    color: #fff;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+
+input[type="file"]:hover {
+    border-color: #00ffff;
 }
 
 button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
+    background-color: transparent;
+    border: 2px solid #ff00ff;
+    color: #ff00ff;
+    font-size: 1.2rem;
     cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
 }
 
 button:hover {
-    background-color: #45a049;
-}
-
-#mediaList {
-    margin-top: 20px;
+    background-color: #ff00ff;
+    color: #1a1a1a;
+    box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
 }
