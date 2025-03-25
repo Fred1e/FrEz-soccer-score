@@ -8,16 +8,15 @@
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to Frezra Media Platform</h1>
-        <p>Upload your media files below:</p>
+        <h1 class="neon-text">Welcome to Frezra Media Platform</h1>
+        <p class="neon-text">Upload your media files below:</p>
 
         <form id="uploadForm" enctype="multipart/form-data">
-            <!-- Allow multiple file types: images, audio, video, documents, and archives -->
             <input type="file" id="fileInput" name="file" accept="image/*,audio/*,video/*,.pdf,.doc,.docx,.txt,.zip,.rar" multiple required />
-            <button type="submit">Upload</button>
+            <button type="submit" class="neon-button">Upload</button>
         </form>
 
-        <h2>Uploaded Media</h2>
+        <h2 class="neon-text">Uploaded Media</h2>
         <div id="mediaList">
             <!-- Uploaded media will appear here -->
         </div>
